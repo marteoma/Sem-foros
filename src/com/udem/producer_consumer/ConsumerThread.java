@@ -1,13 +1,23 @@
+/**
+ * Indica el funcionamiento de un consumidor
+ */
 package com.udem.producer_consumer;
 
 import java.util.concurrent.Semaphore;
 
 class ConsumerThread extends Thread {
 
+    // Semáforo de accesos
     private Semaphore semaphore;
 
+    // Identificador del hilo
     private String threadName;
 
+    /**
+     * Creación de un consumidor
+     * @param semaphore Semáforo, este es global
+     * @param threadName Nombre del consumidor
+     */
     ConsumerThread(Semaphore semaphore, String threadName) {
         super(threadName);
         this.semaphore = semaphore;
@@ -24,6 +34,7 @@ class ConsumerThread extends Thread {
 
             Thread.sleep(50);
 
+            // Acciones cuando el buffer está vació y cuando no
             if (!SharedResource.getInstance().isEmpty()) {
                 String readData = SharedResource.getInstance().getBuffer();
                 System.out.println(threadName + "(Consumer) has got: " + readData);

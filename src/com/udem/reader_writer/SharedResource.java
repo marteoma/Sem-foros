@@ -1,3 +1,8 @@
+/**
+ * Representación del recurso que se escribe y se lee
+ * En el mundo real sería una base de datos, un archivo...
+ * Es un singleton para tener acceso global unificado
+ */
 package com.udem.reader_writer;
 
 import java.util.ArrayList;
@@ -9,6 +14,7 @@ class SharedResource {
         return ourInstance;
     }
 
+    // Cantidad actual de lectores
     private int readers;
 
     private ArrayList<String> data;
@@ -19,7 +25,7 @@ class SharedResource {
     }
 
     /**
-     * Return the total number of readers
+     * Número total de lectores
      * @return Number of current readers
      */
     int getReaders() {
@@ -27,39 +33,39 @@ class SharedResource {
     }
 
     /**
-     * Increment the total number of readers
+     * Aumenta los lectores
      */
     void incrementReaders() {
         this.readers++;
     }
 
     /**
-     * Decrement the total number of readers
+     * Disminuye los lectores
      */
     void decrementReaders() {
         this.readers--;
     }
 
     /**
-     * Return the data in a string way
-     * @return The data as a string
+     * Representación de los datos como cadena
+     * @return Datos como cadena
      */
     String getData() {
         return getHumanReadableData(this.data);
     }
 
     /**
-     * Add a new value to the data
-     * @param value The new value to add
+     * Escribir valor
+     * @param value Valor a escribir
      */
     void addData(String value) {
         this.data.add(value);
     }
 
     /**
-     * Return a string representation of an ArrayList of strings
-     * @param data The ArrayList to convert
-     * @return The string representation of the data
+     * Convierte el arreglo a una representación en cadena
+     * @param data Arreglo
+     * @return Representación
      */
     private String getHumanReadableData(ArrayList<String> data) {
         StringBuilder humanReadableData = new StringBuilder("\n");

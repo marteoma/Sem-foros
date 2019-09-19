@@ -1,15 +1,22 @@
+/**
+ * Representación del hilo de escritor
+ */
 package com.udem.reader_writer;
 
 import java.util.concurrent.Semaphore;
 
 class WriterThread extends Thread {
 
+    // Semáforo de escritura
     private Semaphore writerSemaphore;
 
+    // Semáforo de lectura
     private Semaphore readerSemaphore;
 
+    // Nombre del hilo
     private String threadName;
 
+    // Valor que se escribirá
     private String value;
 
     WriterThread(Semaphore writerSemaphore, Semaphore readerSemaphore, String threadName, String value) {
@@ -26,9 +33,9 @@ class WriterThread extends Thread {
         try {
             System.out.println(threadName + "(Writer) is waiting for a permit.");
             writerSemaphore.acquire();
-//            readerSemaphore.acquire();
             System.out.println(threadName + "(Writer) gets a permit.");
 
+            // Escribe el dato
             SharedResource.getInstance().addData(this.value);
             System.out.println(threadName + " wrote the data");
             Thread.sleep(50);

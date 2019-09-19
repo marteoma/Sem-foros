@@ -1,3 +1,8 @@
+/**
+ * Representación del buffer
+ * Se simula utilizando una cola de Strings para cada dato
+ * Está diseñado como un Singleton para que este sea Global
+ */
 package com.udem.producer_consumer;
 
 import java.util.ArrayDeque;
@@ -10,8 +15,10 @@ class SharedResource {
         return ourInstance;
     }
 
+    // Cola de datos
     private Queue<String> buffer;
 
+    // Tamaño de la cola
     private int size;
 
     private SharedResource() {
@@ -28,41 +35,41 @@ class SharedResource {
     }
 
     /**
-     * Enqueue one element
-     * @param value The new element to add to the Queue
+     * Encola un elemento
+     * @param value Elemento a añadir
      */
     void addValue(String value) {
         this.buffer.offer(value);
     }
 
     /**
-     * Takes the enqueued item and return it
-     * @return The next item to get by FIFO logic
+     * Toma el elemento encolado y lo retorna
+     * @return Siguiente item según FIFO
      */
     String getValue() {
         return this.buffer.poll();
     }
 
     /**
-     * Return whether the Queue is full or not
-     * @return True if the Queue is full, False otherwise
+     * Si la cola está llena o no
+     * @return True si está llena
      */
     boolean isFull() {
         return this.buffer.size() == this.size;
     }
 
     /**
-     * Return whether the Queue is empty or not
-     * @return True if the Queue is empty (zero elements), False otherwise
+     * Si la cola está vacía o no
+     * @return True si está vacía
      */
     boolean isEmpty() {
         return this.buffer.isEmpty();
     }
 
     /**
-     * Return a string representation of a Queue of strings
-     * @param data The Queue to convert
-     * @return The string representation of the data
+     * Representación en String de la cola
+     * @param data Cola a convertir
+     * @return Representación de la cola como cadena
      */
     private String getHumanReadableData(Queue<String> data) {
         StringBuilder humanReadableData = new StringBuilder("\n");
